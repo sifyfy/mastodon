@@ -8,10 +8,8 @@ namespace :emojis_remote do
     saved_shortcodes = []
 
     CustomEmoji.where.not(domain: nil, shortcode: local_emojis).find_each do |e|
-      emoji = CustomEmoji.new(domain: nil, shortcode: e.shortcode, image: e.image)
-
       unless saved_shortcodes.include? e.shortcode
-        emoji.save!
+        CustomEmoji.new(domain: nil, shortcode: e.shortcode, image: e.image).save!
         puts "Emoji saved. shortcode=#{e.shortcode}, domain=#{e.domain}, image=#{e.image}"
         saved_shortcodes << e.shortcode
       end
