@@ -1,4 +1,4 @@
-# site_description
+# site-description
 
 theboss.tech は Mastodon インスタンスの一つです。
 
@@ -6,7 +6,7 @@ theboss.tech は Mastodon インスタンスの一つです。
 
 since 2017/9/2
 
-# site_description_extended
+# site-description-extended
 
 [@the_boss](https://theboss.tech/@the_boss) の個人インスタンスですが、試験的にアカウント登録を開放しています。お気軽にご利用ください。
 
@@ -24,12 +24,12 @@ since 2017/9/2
 - CW/NSFW は各自ご判断を
 - Bot 作成ルール遵守 (後述)
 
-ルールは予告なく変更する場合があります。
+ルールは予告なく変更する場合があります。 (2017/10/25 制定、[履歴](https://github.com/theboss/mastodon/commits/theboss.tech/SITE_DESCRIPTIONS.md))
 
 ## Bot 作成ルール
 
 - リプライを自動で送る場合、対象を Bot のフォロワーのみに絞ってください。
-- 過度な連投などを自動で行う場合、公開範囲を絞ってください。
+- 過度な連投や多量の投稿を自動で行う場合、公開範囲を絞ってください。
   - unlisted, private, direct の使用をご検討ください。迷惑にならない範囲ならば Bot に public 投稿をさせても OK です。
 - 自動で他のアカウントを能動的にフォローしないでください。
   - 自動フォローバックは OK です。なお手動で Bot からフォローするのは、必要最低限ならば OK です。
