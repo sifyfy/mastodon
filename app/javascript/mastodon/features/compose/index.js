@@ -13,6 +13,25 @@ import spring from 'react-motion/lib/spring';
 import SearchResultsContainer from './containers/search_results_container';
 import { changeComposing } from '../../actions/compose';
 
+import Button from '../../components/button';
+
+const CustomEmojiOekaki = class extends React.PureComponent {
+
+  handleClick() {
+    window.open('https://mamemomonga.github.io/mastodon-custom-emoji-oekaki/?theboss.tech');
+    return false;
+  }
+
+  render () {
+    return (
+      <div>
+        <Button text='カスタム絵文字でお絵かきツールを開く' onClick={this.handleClick} block />
+      </div>
+    );
+  }
+
+};
+
 const messages = defineMessages({
   start: { id: 'getting_started.heading', defaultMessage: 'Getting started' },
   home_timeline: { id: 'tabs_bar.home', defaultMessage: 'Home' },
@@ -94,7 +113,7 @@ export default class Compose extends React.PureComponent {
           <div className='drawer__inner' onFocus={this.onFocus}>
             <NavigationContainer onClose={this.onBlur} />
             <ComposeFormContainer />
-            <iframe src='https://mamemomonga.github.io/mastodon-custom-emoji-oekaki/?theboss.tech' sandbox='allow-scripts allow-top-navigation' height='100%' width='100%' />
+            <CustomEmojiOekaki />
           </div>
 
           <Motion defaultStyle={{ x: -100 }} style={{ x: spring(showSearch ? 0 : -100, { stiffness: 210, damping: 20 }) }}>
