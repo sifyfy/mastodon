@@ -18,7 +18,7 @@ import Button from '../../components/button';
 const CustomEmojiOekaki = class extends React.PureComponent {
 
   handleClick() {
-    window.open('https://mamemomonga.github.io/mastodon-custom-emoji-oekaki/?theboss.tech');
+    window.open('https://mamemomonga.github.io/mastodon-custom-emoji-oekaki/#theboss.tech');
     return false;
   }
 
