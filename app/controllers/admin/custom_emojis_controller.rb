@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 module Admin
-  class CustomEmojisController < BaseController
-    before_action :set_custom_emoji, except: [:index, :new, :create]
+  class CustomEmojisController < ApplicationController
+    layout 'admin'
+    before_action :require_admin!, :set_custom_emoji, except: [:index, :new, :create]
 
     def index
       @custom_emojis = filtered_custom_emojis.page(params[:page])
@@ -69,6 +70,10 @@ module Admin
 
     def filtered_custom_emojis
       CustomEmojiFilter.new(filter_params).results
+    end
+
+    def require_admin!
+      redirect_to admin_custom_emojis_path, notice: I18n.t('admin.statuses.failed_to_execute')
     end
 
     def filter_params
