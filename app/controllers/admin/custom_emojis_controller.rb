@@ -73,7 +73,7 @@ module Admin
     end
 
     def require_admin!
-      redirect_to admin_custom_emojis_path, notice: I18n.t('admin.statuses.failed_to_execute')
+      redirect_to admin_custom_emojis_path, notice: I18n.t('admin.statuses.failed_to_execute') unless current_user&.admin?
     end
 
     def filter_params
