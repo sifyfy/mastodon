@@ -15,6 +15,30 @@ import { changeComposing } from '../../actions/compose';
 
 import Button from '../../components/button';
 
+const NarakMojiHenkan = class extends React.PureComponent {
+
+  handleClick() {
+    const textarea = document.querySelector('textarea.autosuggest-textarea__textarea');
+    textarea.value = textarea.innerHTML
+      // hiragana to katakana
+      .replace(/[\u3041-\u3096]/g, s => String.fromCodePoint(s.charCodeAt(0) + 0x60))
+      // katakana to naraku-moji
+      .replace(/[\u30a1-\u30fc]/g, s => '\u200b:nrk' + s.codePointAt(0).toString(16) + ':\u200b')
+      // trim duplicate zero-width-space
+      .replace(/\u200b+/g, '\u200b');
+    return false;
+  }
+
+  render() {
+    return (
+      <div>
+        <Button text='奈落文字に変換する' onClick={this.handleClick} block />
+      </div>
+    );
+  }
+
+};
+
 const CustomEmojiOekaki = class extends React.PureComponent {
 
   handleClick() {
@@ -22,7 +46,7 @@ const CustomEmojiOekaki = class extends React.PureComponent {
     return false;
   }
 
-  render () {
+  render() {
     return (
       <div>
         <Button text='カスタム絵文字でお絵かきツールを開く' onClick={this.handleClick} block />
@@ -59,11 +83,11 @@ export default class Compose extends React.PureComponent {
     intl: PropTypes.object.isRequired,
   };
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.dispatch(mountCompose());
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.props.dispatch(unmountCompose());
   }
 
@@ -75,7 +99,7 @@ export default class Compose extends React.PureComponent {
     this.props.dispatch(changeComposing(false));
   }
 
-  render () {
+  render() {
     const { multiColumn, showSearch, intl } = this.props;
 
     let header = '';
@@ -113,6 +137,8 @@ export default class Compose extends React.PureComponent {
           <div className='drawer__inner' onFocus={this.onFocus}>
             <NavigationContainer onClose={this.onBlur} />
             <ComposeFormContainer />
+            <NarakMojiHenkan />
+            <br />
             <CustomEmojiOekaki />
           </div>
 
