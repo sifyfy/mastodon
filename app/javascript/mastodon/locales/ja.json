@@ -178,6 +178,7 @@
   "standalone.community_title": "ローカルタイムライン",
   "standalone.public_title": "連合タイムライン",
   "status.cannot_reblog": "この投稿はブーストできません",
+  "status.decode_naraku": "奈落文字を解読",
   "status.delete": "削除",
   "status.embed": "埋め込み",
   "status.favourite": "お気に入り",

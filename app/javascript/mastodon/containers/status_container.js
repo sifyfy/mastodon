@@ -13,6 +13,7 @@ import {
   unfavourite,
   pin,
   unpin,
+  decodeNaraku,
 } from '../actions/interactions';
 import {
   blockAccount,
@@ -81,6 +82,10 @@ const mapDispatchToProps = (dispatch, { intl }) => ({
 
   onEmbed (status) {
     dispatch(openModal('EMBED', { url: status.get('url') }));
+  },
+
+  onDecodeNaraku (status) {
+    dispatch(decodeNaraku(status));
   },
 
   onDelete (status) {
