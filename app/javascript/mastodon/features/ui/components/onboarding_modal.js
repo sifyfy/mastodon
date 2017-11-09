@@ -268,7 +268,7 @@ export default class OnboardingModal extends React.PureComponent {
 
     return (
       <div className='modal-root__modal onboarding-modal'>
-        <ReactSwipeableViews index={currentIndex} onChangeIndex={this.handleSwipe} className='onboarding-modal__pager'>
+        <ReactSwipeableViews disabled index={currentIndex} onChangeIndex={this.handleSwipe} className='onboarding-modal__pager'>
           {pages.map((page, i) => {
             const className = classNames('onboarding-modal__page__wrapper', {
               'onboarding-modal__page__wrapper--active': i === currentIndex,
