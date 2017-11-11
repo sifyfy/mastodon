@@ -12,7 +12,7 @@ since 2017/9/2
 
 ## インスタンスの特徴
 
-- [トゥート時に奈落文字へ変換する機能と、タイムラインの奈落文字を解読する機能があります](https://theboss.github.io/blog/2017/11/09/naraku-moji-instance/)。
+- [トゥート時に奈落文字へ変換する機能と、タイムラインの奈落文字を解読する機能があります。](https://theboss.github.io/blog/2017/11/09/naraku-moji-instance/)
 - [アカウントをもっていれば、どなたでもカスタム絵文字を登録することができます。](https://theboss.github.io/blog/2017/10/29/user-customemojis/)
 - [他インスタンスから受信したカスタム絵文字を全て使えるように取り込んでいます。](https://theboss.github.io/blog/2017/10/22/%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E7%B5%B5%E6%96%87%E5%AD%97%E5%85%A8%E9%83%A8%E3%82%B3%E3%83%94%E3%83%BC%E3%81%99%E3%82%8Brake-task%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%9F/)
   - 2 時間おきに更新
