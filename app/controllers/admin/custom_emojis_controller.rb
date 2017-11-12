@@ -2,6 +2,7 @@
 
 module Admin
   class CustomEmojisController < ApplicationController
+    include Authorization
     layout 'admin'
     before_action :require_admin!, :set_custom_emoji, except: [:index, :new, :create]
 
