@@ -7,18 +7,14 @@ module Admin
     before_action :require_admin!, :set_custom_emoji, except: [:index, :new, :create]
 
     def index
-      authorize :custom_emoji, :index?
       @custom_emojis = filtered_custom_emojis.eager_load(:local_counterpart).page(params[:page])
     end
 
     def new
-      authorize :custom_emoji, :create?
       @custom_emoji = CustomEmoji.new
     end
 
     def create
-      authorize :custom_emoji, :create?
-
       @custom_emoji = CustomEmoji.new(resource_params)
 
       if @custom_emoji.save
