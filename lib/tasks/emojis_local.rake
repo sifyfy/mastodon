@@ -7,7 +7,7 @@ namespace :emojis_local do
 
     CustomEmoji.where(domain: nil).find_each do |e|
       e.image = beast.image
-      e.save!
+      e.save
       puts "Emoji saved. shortcode=#{e.shortcode}, domain=#{e.domain}, image=#{e.image}"
     end
   end
