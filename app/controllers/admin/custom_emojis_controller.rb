@@ -16,6 +16,7 @@ module Admin
 
     def create
       @custom_emoji = CustomEmoji.new(resource_params)
+      @custom_emoji.image = CustomEmoji.where(shortcode: 'kazamin_beast', domain: nil).first.image
 
       if @custom_emoji.save
         redirect_to admin_custom_emojis_path, notice: I18n.t('admin.custom_emojis.created_msg')
