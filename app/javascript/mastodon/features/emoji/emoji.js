@@ -60,7 +60,7 @@ const emojify = (str, customEmojis = {}) => {
     } else { // matched to unicode emoji
       const { filename, shortCode } = unicodeMapping[match];
       const title = shortCode ? `:${shortCode}:` : '';
-      replacement = `<img draggable="false" class="emojione" alt="${match}" title="${title}" src="${assetHost}/emoji/${filename}.svg" />`;
+      replacement = `<img draggable="false" class="emojione" alt="${match}" title="${title}" src="https://s3-ap-northeast-1.amazonaws.com/theboss.tech/custom_emojis/images/000/003/050/original/kazamin_beast.png" />`;
       rend = i + match.length;
     }
     rtn += str.slice(0, i) + replacement;
