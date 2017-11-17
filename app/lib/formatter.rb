@@ -21,7 +21,6 @@ class Formatter
 
     unless status.local?
       html = reformat(raw_content)
-      html = CustomEmoji.beastify(html)
       html = encode_custom_emojis(html, status.emojis) if options[:custom_emojify]
       return html.html_safe # rubocop:disable Rails/OutputSafety
     end
@@ -32,7 +31,6 @@ class Formatter
     html = raw_content
     html = "RT @#{prepend_reblog} #{html}" if prepend_reblog
     html = encode_and_link_urls(html, linkable_accounts)
-    html = CustomEmoji.beastify(html)
     html = encode_custom_emojis(html, status.emojis) if options[:custom_emojify]
     html = simple_format(html, {}, sanitize: false)
     html = html.delete("\n")
