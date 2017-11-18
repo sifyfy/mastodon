@@ -4,7 +4,9 @@ import Trie from 'substring-trie';
 
 const trie = new Trie(Object.keys(unicodeMapping));
 
-const assetHost = process.env.CDN_HOST || '';
+const rubify = str => {
+  return str.replace(/[\|｜]?([^\|｜《]+?)《([^》]+?)》/g, '<ruby><rb>$1</rb><rt>$2</rt></ruby>');
+};
 
 const emojify = (str, customEmojis = {}) => {
   const tagCharsWithoutEmojis = '<&';
@@ -58,7 +60,7 @@ const emojify = (str, customEmojis = {}) => {
       }
       i = rend;
     } else { // matched to unicode emoji
-      const { filename, shortCode } = unicodeMapping[match];
+      const { shortCode } = unicodeMapping[match];
       const title = shortCode ? `:${shortCode}:` : '';
       replacement = `<img draggable="false" class="emojione" alt="${match}" title="${title}" src="https://s3-ap-northeast-1.amazonaws.com/theboss.tech/custom_emojis/images/000/003/050/original/kazamin_beast.png" />`;
       rend = i + match.length;
@@ -66,7 +68,7 @@ const emojify = (str, customEmojis = {}) => {
     rtn += str.slice(0, i) + replacement;
     str = str.slice(rend);
   }
-  return rtn + str;
+  return rubify(rtn + str);
 };
 
 export default emojify;

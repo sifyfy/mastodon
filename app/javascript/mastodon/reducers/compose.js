@@ -22,6 +22,7 @@ import {
   COMPOSE_VISIBILITY_CHANGE,
   COMPOSE_COMPOSING_CHANGE,
   COMPOSE_EMOJI_INSERT,
+  COMPOSE_YOMIGANA_INSERT,
   COMPOSE_UPLOAD_CHANGE_REQUEST,
   COMPOSE_UPLOAD_CHANGE_SUCCESS,
   COMPOSE_UPLOAD_CHANGE_FAIL,
@@ -127,6 +128,17 @@ const insertEmoji = (state, position, emojiData) => {
 
   return state.withMutations(map => {
     map.update('text', oldText => `${oldText.slice(0, position)}${emoji} ${oldText.slice(position)}`);
+    map.set('focusDate', new Date());
+    map.set('idempotencyKey', uuid());
+  });
+};
+
+const insertYomigana = (state, selectionStart, selectionEnd, text) => {
+  return state.withMutations(map => {
+    map.update('text', oldText => {
+      const selection = oldText.slice(selectionStart, selectionEnd);
+      return `${oldText.slice(0, selectionStart)}｜${selection ? selection : '漢字'}《》${oldText.slice(selectionEnd)}`;
+    });
     map.set('focusDate', new Date());
     map.set('idempotencyKey', uuid());
   });
@@ -260,6 +272,8 @@ export default function compose(state = initialState, action) {
     }
   case COMPOSE_EMOJI_INSERT:
     return insertEmoji(state, action.position, action.emoji);
+  case COMPOSE_YOMIGANA_INSERT:
+    return insertYomigana(state, action.selectionStart, action.selectionEnd, action.text);
   case COMPOSE_UPLOAD_CHANGE_SUCCESS:
     return state
       .set('is_submitting', false)
