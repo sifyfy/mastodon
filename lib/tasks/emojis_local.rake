@@ -14,4 +14,10 @@ namespace :emojis_local do
       end
     end
   end
+
+  desc 'Delete all local emojis except some emojis'
+  task delete_all: :environment do
+    excepts = ['blank', 'kazamin_beast', 'kemono_friends', 'kemofure', 'no']
+    CustomEmoji.where(domain: nil).where.not(shortcode: excepts).delete_all
+  end
 end
