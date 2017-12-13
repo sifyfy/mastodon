@@ -164,6 +164,8 @@ export default class ComposeForm extends ImmutablePureComponent {
 
     return (
       <div className='compose-form'>
+        <WarningContainer />
+
         <Collapsable isVisible={this.props.spoiler} fullHeight={50}>
           <div className='spoiler-input'>
             <label>
@@ -172,8 +174,6 @@ export default class ComposeForm extends ImmutablePureComponent {
             </label>
           </div>
         </Collapsable>
-
-        <WarningContainer />
 
         <ReplyIndicatorContainer />
 
@@ -207,11 +207,11 @@ export default class ComposeForm extends ImmutablePureComponent {
             <SensitiveButtonContainer />
             <SpoilerButtonContainer />
           </div>
+          <div className='character-counter__wrapper'><CharacterCounter max={500} text={text} /></div>
+        </div>
 
-          <div className='compose-form__publish'>
-            <div className='character-counter__wrapper'><CharacterCounter max={500} text={text} /></div>
-            <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabled || this.props.is_uploading || length(text) > 500 || (text.length !== 0 && text.trim().length === 0)} block /></div>
-          </div>
+        <div className='compose-form__publish'>
+          <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabled || this.props.is_uploading || length(text) > 500 || (text.length !== 0 && text.trim().length === 0)} block /></div>
         </div>
 
         <p>
