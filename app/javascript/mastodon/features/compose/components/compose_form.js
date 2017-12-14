@@ -149,6 +149,23 @@ export default class ComposeForm extends ImmutablePureComponent {
     this.props.onInsertYomigana(selectionStart, selectionEnd, text);
   }
 
+  handleNarakuClick() {
+    const textarea = document.querySelector('textarea.autosuggest-textarea__textarea');
+    textarea.value = textarea.innerHTML
+      // hiragana to katakana
+      .replace(/[\u3041-\u3096]/g, s => String.fromCodePoint(s.charCodeAt(0) + 0x60))
+      // katakana to naraku-moji
+      .replace(/[\u30a1-\u30ef\u30f2\u30f3\u30fc]/g, s => '\u200b:nrk' + s.codePointAt(0).toString(16) + ':\u200b')
+      // trim duplicate zero-width-space
+      .replace(/\u200b+/g, '\u200b');
+    return false;
+  }
+
+  handleOekakiClick() {
+    window.open('https://mamemomonga.github.io/mastodon-custom-emoji-oekaki/#theboss.tech');
+    return false;
+  }
+
   render () {
     const { intl, onPaste, showSearch } = this.props;
     const disabled = this.props.is_submitting;
@@ -216,6 +233,8 @@ export default class ComposeForm extends ImmutablePureComponent {
 
         <div>
           <Button text='読み仮名を挿入' onClick={this.handleYomiganaClick} block style={{ marginTop: '10px' }} />
+          <Button text='奈落文字に変換する' onClick={this.handleNarakuClick} block style={{ marginTop: '10px' }} />
+          <Button text='カスタム絵文字でお絵かきツールを開く' onClick={this.handleOekakiClick} block style={{ marginTop: '10px' }} />
         </div>
       </div>
     );
