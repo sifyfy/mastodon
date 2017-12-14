@@ -214,9 +214,9 @@ export default class ComposeForm extends ImmutablePureComponent {
           <div className='compose-form__publish-button-wrapper'><Button text={publishText} onClick={this.handleSubmit} disabled={disabled || this.props.is_uploading || length(text) > 500 || (text.length !== 0 && text.trim().length === 0)} block /></div>
         </div>
 
-        <p>
-          <Button text='読み仮名を挿入' onClick={this.handleYomiganaClick} block />
-        </p>
+        <div>
+          <Button text='読み仮名を挿入' onClick={this.handleYomiganaClick} block style={{ marginTop: '10px' }} />
+        </div>
       </div>
     );
   }
