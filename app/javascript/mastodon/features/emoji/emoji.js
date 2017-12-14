@@ -6,10 +6,6 @@ const trie = new Trie(Object.keys(unicodeMapping));
 
 const assetHost = process.env.CDN_HOST || '';
 
-const rubify = str => {
-  return str.replace(/[\|｜]?([^\|｜《]+?)《([^》]+?)》/g, '<ruby><rb>$1</rb><rt>$2</rt></ruby>');
-};
-
 const emojify = (str, customEmojis = {}) => {
   const tagCharsWithoutEmojis = '<&';
   const tagCharsWithEmojis = Object.keys(customEmojis).length ? '<&:' : '<&';
@@ -70,10 +66,14 @@ const emojify = (str, customEmojis = {}) => {
     rtn += str.slice(0, i) + replacement;
     str = str.slice(rend);
   }
-  return rubify(rtn + str);
+  return rtn + str;
 };
 
-export default emojify;
+const rubify = (str, customEmojis = {}) => {
+  return emojify(str, customEmojis).replace(/[\|｜]?([^\|｜《]+?)《([^》]+?)》/g, '<ruby><rb>$1</rb><rt>$2</rt></ruby>');
+};
+
+export default rubify;
 
 export const buildCustomEmojis = (customEmojis) => {
   const emojis = [];
