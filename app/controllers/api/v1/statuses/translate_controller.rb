@@ -13,7 +13,7 @@ class Api::V1::Statuses::TranslateController < Api::BaseController
     @status = requested_status
 
     res = HTTP.headers('Ocp-Apim-Subscription-Key': ENV['AZURE_TRANSLATE_SUBSUCRIBE_KEY'])
-      .get("https://api.microsofttranslator.com/V2/Http.svc/Translate", params: {text: @status.text, to: current_user.locale || 'ja'})
+      .get("https://api.microsofttranslator.com/V2/Http.svc/Translate", params: {text: @status.text, to: I18n.locale || 'ja'})
 
     @status.text << ' / ' + Nokogiri::XML.parse(res.to_s).text
 
