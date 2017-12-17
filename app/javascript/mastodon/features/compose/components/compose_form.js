@@ -233,7 +233,7 @@ export default class ComposeForm extends ImmutablePureComponent {
             <PrivacyDropdownContainer />
             <SensitiveButtonContainer />
             <SpoilerButtonContainer />
-            <DropdownMenuContainer items={menu} icon='language' size={18} direction='right' title={intl.formatMessage(messages.translate)} />
+            <DropdownMenuContainer items={menu} icon='language' size={18} direction='right' title={intl.formatMessage(messages.translate)} dropdownMenuClassName='scrollableDropdownMenu' />
           </div>
           <div className='character-counter__wrapper'><CharacterCounter max={500} text={text} /></div>
         </div>

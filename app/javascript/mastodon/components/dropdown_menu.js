@@ -22,6 +22,7 @@ class DropdownMenu extends React.PureComponent {
     placement: PropTypes.string,
     arrowOffsetLeft: PropTypes.string,
     arrowOffsetTop: PropTypes.string,
+    dropdownMenuClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -81,12 +82,12 @@ class DropdownMenu extends React.PureComponent {
   }
 
   render () {
-    const { items, style, placement, arrowOffsetLeft, arrowOffsetTop } = this.props;
+    const { items, style, placement, arrowOffsetLeft, arrowOffsetTop, dropdownMenuClassName } = this.props;
 
     return (
       <Motion defaultStyle={{ opacity: 0, scaleX: 0.85, scaleY: 0.75 }} style={{ opacity: spring(1, { damping: 35, stiffness: 400 }), scaleX: spring(1, { damping: 35, stiffness: 400 }), scaleY: spring(1, { damping: 35, stiffness: 400 }) }}>
         {({ opacity, scaleX, scaleY }) => (
-          <div className='dropdown-menu' style={{ ...style, opacity: opacity, transform: `scale(${scaleX}, ${scaleY})` }} ref={this.setRef}>
+          <div className={`dropdown-menu ${dropdownMenuClassName}`} style={{ ...style, opacity: opacity, transform: `scale(${scaleX}, ${scaleY})` }} ref={this.setRef}>
             <div className={`dropdown-menu__arrow ${placement}`} style={{ left: arrowOffsetLeft, top: arrowOffsetTop }} />
 
             <ul>
@@ -117,6 +118,7 @@ export default class Dropdown extends React.PureComponent {
     isModalOpen: PropTypes.bool.isRequired,
     onModalOpen: PropTypes.func,
     onModalClose: PropTypes.func,
+    dropdownMenuClassName: PropTypes.string,
   };
 
   static defaultProps = {
@@ -186,7 +188,7 @@ export default class Dropdown extends React.PureComponent {
   }
 
   render () {
-    const { icon, items, size, title, disabled } = this.props;
+    const { icon, items, size, title, disabled, dropdownMenuClassName } = this.props;
     const { expanded } = this.state;
 
     return (
@@ -202,7 +204,7 @@ export default class Dropdown extends React.PureComponent {
         />
 
         <Overlay show={expanded} placement='bottom' target={this.findTarget}>
-          <DropdownMenu items={items} onClose={this.handleClose} />
+          <DropdownMenu items={items} onClose={this.handleClose} dropdownMenuClassName={dropdownMenuClassName} />
         </Overlay>
       </div>
     );
