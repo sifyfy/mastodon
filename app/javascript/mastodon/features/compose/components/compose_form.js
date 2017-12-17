@@ -142,6 +142,10 @@ export default class ComposeForm extends ImmutablePureComponent {
     this.props.onPickEmoji(position, data);
   }
 
+  handleTranslateClick = () => {
+    this.props.onTranslate(this.autosuggestTextarea.textarea.value);
+  }
+
   handleYomiganaClick = () => {
     const selectionStart = this.autosuggestTextarea.textarea.selectionStart;
     const selectionEnd = this.autosuggestTextarea.textarea.selectionEnd;
@@ -232,6 +236,7 @@ export default class ComposeForm extends ImmutablePureComponent {
         </div>
 
         <div>
+          <Button text='英語に翻訳' onClick={this.handleTranslateClick} block style={{ marginTop: '10px' }} />
           <Button text='読み仮名を挿入' onClick={this.handleYomiganaClick} block style={{ marginTop: '10px' }} />
           <Button text='奈落文字に変換する' onClick={this.handleNarakuClick} block style={{ marginTop: '10px' }} />
           <Button text='絵文字でお絵かきツールを開く' onClick={this.handleOekakiClick} block style={{ marginTop: '10px' }} />

@@ -39,6 +39,11 @@ export const COMPOSE_LISTABILITY_CHANGE = 'COMPOSE_LISTABILITY_CHANGE';
 export const COMPOSE_COMPOSING_CHANGE = 'COMPOSE_COMPOSING_CHANGE';
 
 export const COMPOSE_EMOJI_INSERT = 'COMPOSE_EMOJI_INSERT';
+
+export const COMPOSE_TRANSLATE_REQUEST = 'COMPOSE_TRANSLATE_REQUEST';
+export const COMPOSE_TRANSLATE_SUCCESS = 'COMPOSE_TRANSLATE_SUCCESS';
+export const COMPOSE_TRANSLATE_FAIL = 'COMPOSE_TRANSLATE_FAIL';
+
 export const COMPOSE_YOMIGANA_INSERT = 'COMPOSE_YOMIGANA_INSERT';
 
 export const COMPOSE_UPLOAD_CHANGE_REQUEST     = 'COMPOSE_UPLOAD_UPDATE_REQUEST';
@@ -366,6 +371,40 @@ export function insertEmojiCompose(position, emoji) {
     type: COMPOSE_EMOJI_INSERT,
     position,
     emoji,
+  };
+};
+
+export function translate(text) {
+  return (dispatch, getState) => {
+    dispatch(translateRequest(text));
+
+    api(getState).get(`/api/v1/translate?text=${text}&to=en`).then(response => {
+      console.log(response.data);
+      dispatch(translateSuccess(response.data.text));
+    }).catch(error => {
+      dispatch(translateFail(error));
+    });
+  };
+};
+
+export function translateRequest(text) {
+  return {
+    type: COMPOSE_TRANSLATE_REQUEST,
+    text,
+  };
+};
+
+export function translateSuccess(text) {
+  return {
+    type: COMPOSE_TRANSLATE_SUCCESS,
+    text,
+  };
+};
+
+export function translateFail(error) {
+  return {
+    type: COMPOSE_TRANSLATE_FAIL,
+    error,
   };
 };
 
