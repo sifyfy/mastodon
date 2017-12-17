@@ -10,6 +10,7 @@ import { defineMessages, injectIntl } from 'react-intl';
 import Collapsable from '../../../components/collapsable';
 import SpoilerButtonContainer from '../containers/spoiler_button_container';
 import PrivacyDropdownContainer from '../containers/privacy_dropdown_container';
+import DropdownMenuContainer from '../../../containers/dropdown_menu_container';
 import SensitiveButtonContainer from '../containers/sensitive_button_container';
 import EmojiPickerDropdown from '../containers/emoji_picker_dropdown_container';
 import UploadFormContainer from '../containers/upload_form_container';
@@ -24,6 +25,7 @@ const messages = defineMessages({
   spoiler_placeholder: { id: 'compose_form.spoiler_placeholder', defaultMessage: 'Write your warning here' },
   publish: { id: 'compose_form.publish', defaultMessage: 'Toot' },
   publishLoud: { id: 'compose_form.publish_loud', defaultMessage: '{publish}!' },
+  translate: { id: 'status.translate', defaultMessage: 'Translate' },
 });
 
 @injectIntl
@@ -142,8 +144,8 @@ export default class ComposeForm extends ImmutablePureComponent {
     this.props.onPickEmoji(position, data);
   }
 
-  handleTranslateClick = () => {
-    this.props.onTranslate(this.autosuggestTextarea.textarea.value);
+  handleTranslate = (lang) => {
+    this.props.onTranslate(this.autosuggestTextarea.textarea.value, lang);
   }
 
   handleYomiganaClick = () => {
@@ -182,6 +184,10 @@ export default class ComposeForm extends ImmutablePureComponent {
     } else {
       publishText = this.props.privacy !== 'unlisted' ? intl.formatMessage(messages.publishLoud, { publish: intl.formatMessage(messages.publish) }) : intl.formatMessage(messages.publish);
     }
+
+    const menu = [];
+    const languages = ['en', 'ja', 'af', 'ar', 'bn', 'bs-Latn', 'bg', 'ca', 'zh-CHS', 'zh-CHT', 'yue', 'hr', 'cs', 'da', 'nl', 'et', 'fj', 'fil', 'fi', 'fr', 'de', 'el', 'ht', 'he', 'hi', 'mww', 'hu', 'id', 'it', 'sw', 'tlh', 'tlh-Qaak', 'ko', 'lv', 'lt', 'mg', 'ms', 'mt', 'yua', 'no', 'otq', 'fa', 'pl', 'pt', 'ro', 'ru', 'sm', 'sr-Cyrl', 'sr-Latn', 'sk', 'sl', 'es', 'sv', 'ty', 'ta', 'th', 'to', 'tr', 'uk', 'ur', 'vi', 'cy'];
+    languages.forEach(lang => menu.push({ text: lang, action: () => this.handleTranslate(lang) }));
 
     return (
       <div className='compose-form'>
@@ -227,6 +233,7 @@ export default class ComposeForm extends ImmutablePureComponent {
             <PrivacyDropdownContainer />
             <SensitiveButtonContainer />
             <SpoilerButtonContainer />
+            <DropdownMenuContainer items={menu} icon='language' size={18} direction='right' title={intl.formatMessage(messages.translate)} />
           </div>
           <div className='character-counter__wrapper'><CharacterCounter max={500} text={text} /></div>
         </div>
@@ -236,7 +243,6 @@ export default class ComposeForm extends ImmutablePureComponent {
         </div>
 
         <div>
-          <Button text='英語に翻訳' onClick={this.handleTranslateClick} block style={{ marginTop: '10px' }} />
           <Button text='読み仮名を挿入' onClick={this.handleYomiganaClick} block style={{ marginTop: '10px' }} />
           <Button text='奈落文字に変換する' onClick={this.handleNarakuClick} block style={{ marginTop: '10px' }} />
           <Button text='絵文字でお絵かきツールを開く' onClick={this.handleOekakiClick} block style={{ marginTop: '10px' }} />

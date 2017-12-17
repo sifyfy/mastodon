@@ -374,12 +374,15 @@ export function insertEmojiCompose(position, emoji) {
   };
 };
 
-export function translate(text) {
+export function translate(text, lang) {
+  if (text === '') {
+    return translateSuccess(text);
+  }
+
   return (dispatch, getState) => {
     dispatch(translateRequest(text));
 
-    api(getState).get(`/api/v1/translate?text=${text}&to=en`).then(response => {
-      console.log(response.data);
+    api(getState).get(`/api/v1/translate?text=${text}&to=${lang}`).then(response => {
       dispatch(translateSuccess(response.data.text));
     }).catch(error => {
       dispatch(translateFail(error));

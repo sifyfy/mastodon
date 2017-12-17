@@ -61,8 +61,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(insertEmojiCompose(position, data));
   },
 
-  onTranslate (text) {
-    dispatch(translate(text));
+  onTranslate (text, lang) {
+    dispatch(translate(text, lang));
   },
 
   onInsertYomigana (selectionStart, selectionEnd, text) {
