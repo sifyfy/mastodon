@@ -9,6 +9,7 @@ import {
   UNFAVOURITE_SUCCESS,
   PIN_SUCCESS,
   UNPIN_SUCCESS,
+  TRANSLATE_SUCCESS,
   DECODE_NARAKU,
 } from '../actions/interactions';
 import {
@@ -133,6 +134,8 @@ export default function statuses(state = initialState, action) {
     return normalizeStatuses(state, action.statuses);
   case TIMELINE_DELETE:
     return deleteStatus(state, action.id, action.references);
+  case TRANSLATE_SUCCESS:
+    return normalizeStatus(state, action.status);
   case DECODE_NARAKU:
     return decodeNaraku(state, action.status);
   default:

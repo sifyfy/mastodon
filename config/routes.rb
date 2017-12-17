@@ -208,6 +208,8 @@ Rails.application.routes.draw do
 
           resource :pin, only: :create
           post :unpin, to: 'pins#destroy'
+
+          resources :translate, only: :index
         end
 
         member do
