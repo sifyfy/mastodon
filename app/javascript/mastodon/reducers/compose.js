@@ -136,7 +136,7 @@ const insertEmoji = (state, position, emojiData) => {
 
 const translate = (state, text) => {
   return state.withMutations(map => {
-    map.update('text', () => text);
+    map.update('text', oldText => oldText + '\n[Translated] ' + text);
     map.set('focusDate', new Date());
     map.set('idempotencyKey', uuid());
   });
