@@ -15,6 +15,7 @@ import {
   unreblog,
   pin,
   unpin,
+  translate,
   decodeNaraku,
 } from '../../actions/interactions';
 import {
@@ -155,6 +156,10 @@ export default class Status extends ImmutablePureComponent {
 
   handleEmbed = (status) => {
     this.props.dispatch(openModal('EMBED', { url: status.get('url') }));
+  }
+
+  handleTranslate = (status) => {
+    this.props.dispatch(translate(status));
   }
 
   handleDecodeNaraku = (status) => {
@@ -329,6 +334,7 @@ export default class Status extends ImmutablePureComponent {
                   onReport={this.handleReport}
                   onPin={this.handlePin}
                   onEmbed={this.handleEmbed}
+                  onTranslate={this.handleTranslate}
                   onDecodeNaraku={this.handleDecodeNaraku}
                 />
               </div>

@@ -61,7 +61,7 @@ export default class ActionsModal extends ImmutablePureComponent {
     );
 
     return (
-      <div className='modal-root__modal actions-modal'>
+      <div className='modal-root__modal actions-modal autoScrollableModal'>
         {status}
 
         <ul>

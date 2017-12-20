@@ -32,12 +32,15 @@ export const UNPIN_REQUEST = 'UNPIN_REQUEST';
 export const UNPIN_SUCCESS = 'UNPIN_SUCCESS';
 export const UNPIN_FAIL    = 'UNPIN_FAIL';
 
+export const TRANSLATE_REQUEST = 'TRANSLATE_REQUEST';
+export const TRANSLATE_SUCCESS = 'TRANSLATE_SUCCESS';
+export const TRANSLATE_FAIL = 'TRANSLATE_FAIL';
+
 export const DECODE_NARAKU = 'DECODE_NARAKU';
 
 export function reblog(status) {
   return function (dispatch, getState) {
     dispatch(reblogRequest(status));
-
     api(getState).post(`/api/v1/statuses/${status.get('id')}/reblog`).then(function (response) {
       // The reblog API method returns a new status wrapped around the original. In this case we are only
       // interested in how the original is modified, hence passing it skipping the wrapper
@@ -310,6 +313,39 @@ export function unpinFail(status, error) {
   return {
     type: UNPIN_FAIL,
     status,
+    error,
+  };
+};
+
+export function translate(status) {
+  return (dispatch, getState) => {
+    dispatch(translateRequest(status));
+
+    api(getState).get(`/api/v1/statuses/${status.get('id')}/translate`).then(response => {
+      dispatch(translateSuccess(response.data));
+    }).catch(error => {
+      dispatch(translateFail(error));
+    });
+  };
+};
+
+export function translateRequest(status) {
+  return {
+    type: TRANSLATE_REQUEST,
+    status,
+  };
+};
+
+export function translateSuccess(status) {
+  return {
+    type: TRANSLATE_SUCCESS,
+    status,
+  };
+};
+
+export function translateFail(error) {
+  return {
+    type: TRANSLATE_FAIL,
     error,
   };
 };

@@ -4601,3 +4601,12 @@ noscript {
     margin-bottom: 0;
   }
 }
+
+.scrollableDropdownMenu {
+  overflow-y: scroll;
+  height: 25em;
+}
+
+.autoScrollableModal {
+  overflow-y: auto;
+}
