@@ -4606,3 +4606,7 @@ noscript {
   overflow-y: scroll;
   height: 25em;
 }
+
+.autoScrollableModal {
+  overflow-y: auto;
+}
