@@ -44,6 +44,7 @@ export const COMPOSE_TRANSLATE_REQUEST = 'COMPOSE_TRANSLATE_REQUEST';
 export const COMPOSE_TRANSLATE_SUCCESS = 'COMPOSE_TRANSLATE_SUCCESS';
 export const COMPOSE_TRANSLATE_FAIL = 'COMPOSE_TRANSLATE_FAIL';
 
+export const COMPOSE_RANDOMIZE = 'COMPOSE_RANDOMIZE';
 export const COMPOSE_YOMIGANA_INSERT = 'COMPOSE_YOMIGANA_INSERT';
 
 export const COMPOSE_UPLOAD_CHANGE_REQUEST     = 'COMPOSE_UPLOAD_UPDATE_REQUEST';
@@ -409,6 +410,13 @@ export function translateFail(error) {
     error,
   };
 };
+
+export function randomize(text) {
+  return {
+    type: COMPOSE_RANDOMIZE,
+    text,
+  };
+}
 
 export function insertYomigana(selectionStart, selectionEnd, text) {
   return {

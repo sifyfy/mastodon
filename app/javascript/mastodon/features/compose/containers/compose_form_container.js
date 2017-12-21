@@ -10,6 +10,7 @@ import {
   changeComposeSpoilerText,
   insertEmojiCompose,
   translate,
+  randomize,
   insertYomigana,
 } from '../../../actions/compose';
 
@@ -63,6 +64,10 @@ const mapDispatchToProps = (dispatch) => ({
 
   onTranslate (text, lang) {
     dispatch(translate(text, lang));
+  },
+
+  onRandomize (text) {
+    dispatch(randomize(text));
   },
 
   onInsertYomigana (selectionStart, selectionEnd, text) {

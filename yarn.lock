@@ -6875,6 +6875,10 @@ string_decoder@^1.0.0, string_decoder@~1.0.3:
   dependencies:
     safe-buffer "~5.1.0"
 
+"string_random.js@https://github.com/cho45/String_random.js.git":
+  version "0.0.4"
+  resolved "https://github.com/cho45/String_random.js.git#856bed18783756f813071d8364d5c4585ce1f4b8"
+
 stringstream@~0.0.4, stringstream@~0.0.5:
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/stringstream/-/stringstream-0.0.5.tgz#4e484cd4de5a0bbbee18e46307710a8a81621878"

@@ -23,6 +23,7 @@ import {
   COMPOSE_COMPOSING_CHANGE,
   COMPOSE_EMOJI_INSERT,
   COMPOSE_TRANSLATE_SUCCESS,
+  COMPOSE_RANDOMIZE,
   COMPOSE_YOMIGANA_INSERT,
   COMPOSE_UPLOAD_CHANGE_REQUEST,
   COMPOSE_UPLOAD_CHANGE_SUCCESS,
@@ -34,6 +35,8 @@ import { STORE_HYDRATE } from '../actions/store';
 import { Map as ImmutableMap, List as ImmutableList, OrderedSet as ImmutableOrderedSet, fromJS } from 'immutable';
 import uuid from '../uuid';
 import { me } from '../initial_state';
+
+import { String_random } from 'string_random.js';
 
 const initialState = ImmutableMap({
   mounted: false,
@@ -137,6 +140,22 @@ const insertEmoji = (state, position, emojiData) => {
 const translate = (state, text) => {
   return state.withMutations(map => {
     map.update('text', oldText => oldText + '\n[Translated] ' + text);
+    map.set('focusDate', new Date());
+    map.set('idempotencyKey', uuid());
+  });
+};
+
+const randomize = (state) => {
+  return state.withMutations(map => {
+    const text = map.get('spoiler_text') || map.get('text');
+    try {
+      const regex = new RegExp(text);
+      map.set('text', Array.from(Array(3)).map(() => String_random(regex)).join('\n'));
+    } catch (e) {
+      map.set('text', e.toString());
+    }
+    map.set('spoiler', true);
+    map.set('spoiler_text', text);
     map.set('focusDate', new Date());
     map.set('idempotencyKey', uuid());
   });
@@ -283,6 +302,8 @@ export default function compose(state = initialState, action) {
     return insertEmoji(state, action.position, action.emoji);
   case COMPOSE_TRANSLATE_SUCCESS:
     return translate(state, action.text);
+  case COMPOSE_RANDOMIZE:
+    return randomize(state, action.text);
   case COMPOSE_YOMIGANA_INSERT:
     return insertYomigana(state, action.selectionStart, action.selectionEnd, action.text);
   case COMPOSE_UPLOAD_CHANGE_SUCCESS:
