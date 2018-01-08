@@ -363,6 +363,11 @@
       padding-right: 280px + 15px;
     }
 
+    .container.without-panel {
+      position: relative;
+      padding-right: 0px;
+    }
+
     .information-board-sections {
       display: flex;
       justify-content: space-between;
