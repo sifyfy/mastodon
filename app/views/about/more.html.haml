@@ -55,8 +55,8 @@
   .information-board
     .container.without-panel
       .information-board-sections
-        .section
-          %span Weekly activity of
+        .section.title
+          %span Latest weekly activities from
           %strong.activity-count#week
           %span.activity-count#week-relative
         .section
@@ -66,11 +66,11 @@
         .section
           %span ログイン数
           %strong.activity-count#logins
-          %span 人
+          %span= t 'about.user_count_after'
         .section
-          %span 登録者数
+          %span 新規登録者数
           %strong.activity-count#registrations
-          %span 人
+          %span= t 'about.user_count_after'
 
   .extended-description
     .container

@@ -364,8 +364,7 @@
     }
 
     .container.without-panel {
-      position: relative;
-      padding-right: 0px;
+      padding-right: 0;
     }
 
     .information-board-sections {
@@ -399,6 +398,11 @@
         font-size: 32px;
         line-height: 48px;
       }
+    }
+
+    .section.title {
+      text-align: left;
+      flex: 2 0 0;
     }
 
     .panel {
