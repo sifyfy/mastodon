@@ -363,6 +363,10 @@
       padding-right: 280px + 15px;
     }
 
+    .container.without-panel {
+      padding-right: 0;
+    }
+
     .information-board-sections {
       display: flex;
       justify-content: space-between;
@@ -394,6 +398,11 @@
         font-size: 32px;
         line-height: 48px;
       }
+    }
+
+    .section.title {
+      text-align: left;
+      flex: 2 0 0;
     }
 
     .panel {
